@@ -1,0 +1,22 @@
+function [pos_l,vel_l,acc_l,jerk_l,snap_l,B_l] = leader_trajectory(t)
+%     pos_l = [5*t;25*sin(pi*t/50);25*sin(pi*t/50)];
+%     vel_l = [5;pi/2*cos(pi*t/50);pi/2*cos(pi*t/50)];
+%     acc_l = [0;pi^2/100*sin(pi*t/50);pi^2/100*sin(pi*t/50)];
+%     jerk_l = [0;pi^3/5000*cos(pi*t/50);pi^3/5000*cos(pi*t/50)];
+%     snap_l = [0;pi^4/250000*sin(pi*t/50);pi^4/250000*sin(pi*t/50)];
+    pos_l = [0;0.75*t;1.5];
+    vel_l = [0;0.75;0];
+    acc_l = zeros(3,1);
+    jerk_l = zeros(3,1);
+    snap_l = zeros(3,1);
+    b = [cos(pi*t); sin(pi*t); 0];
+    b_dot = [-pi*sin(pi*t); pi*cos(pi*t); 0];
+    b_2dot = [-pi^2*cos(pi*t); -pi^2*sin(pi*t); 0];
+%     b = [sin(pi*t); 0; cos(pi*t)];
+%     b_dot = [pi*cos(pi*t); 0; -pi*sin(pi*t)];
+%     b_2dot = [-pi^2*sin(pi*t); 0; -pi^2*cos(pi*t)];
+%     b = [1;0;0];
+%     b_dot = zeros(3,1);
+%     b_2dot = zeros(3,1);
+    B_l = [b,b_dot,b_2dot];
+end
